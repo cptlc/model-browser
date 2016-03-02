@@ -1,0 +1,21 @@
+PREREQUISITES:
+* A working CPTL Model Server (https://github.com/cptlc/model-server).
+  - Modify the headers in model-server/src/cptl/requests.py to 'Access-Control-Allow-Origin' to
+     the URL for the browser you are about to install (e.g. http://localhost:8008).  Do this for
+     all Request Handlers.
+
+CLONE REPOSITORY
+* git clone https://github.com/cptlc/model-browser.git
+* cd model-browser
+
+CONFIGURE
+* To start the browser, run the command:  python -m SimpleHTTPServer 8008
+* Browse to http://localhost:8008.  Click on the upper left icon and then the
+   'Config' link.
+* Once at the config page (http://localhost:8008/config.html).  Enter the
+   URL of the CPTL Model Server (http://localhost:443) and hit 'save'.
+   
+GETTING
+* Browse to http://localhost:8008 and click on the upper left icon and then the
+   'Docs' link.  Examples and more are linked to from the examples.
+   

@@ -1,0 +1,84 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+  <head>
+    <title>CPTL Views API</title>
+    <link rel="stylesheet" href="/static/css/jsdoc.css">
+  </head>
+  <body>
+    <!-- header -->
+    <div id="header"></div>
+
+    <!-- resource index -->
+    <div id="index">
+      <ul class="classList">
+	<li><a href="index.html">/api/v1.0.0/views</a></li>
+	<li><a href="/static/api/v1.0.0/views/docs/config.html">/api/v1.0.0/views/config</a></li>	
+	<li><a href="/static/api/v1.0.0/views/docs/graphs.html">/api/v1.0.0/views/graphs</a></li>
+      </ul>
+    </div>
+
+    <div id="content">      
+      <h1 class="classTitle">Resource  /api/v1.0.0/views/config</h1>
+      <br/>
+
+      <table class="summaryTable">
+	<tr>
+	  <th colspan="2">Configuration Panel</th>
+	</tr>
+	<tr>
+	  <td>URL</td>
+	  <td><b><code>/api/v1.0.0/views/config.html</code></b>
+	</tr>
+	<tr>
+	  <td>Method</td>
+	  <td><code>GET</code></td>
+	</tr>
+	<tr>
+	  <td>URL Params</td>
+	  <td>None</td>
+	</tr>
+	<tr>
+	  <td>Local Storage</td>
+	  <td><p><b>Required:</b><br/>
+	      <code>server_base_url</code><br/>
+	      example: <code>localStorage.setItem('server_base_url', 'http://localhost:443')</code><br/>
+	    <p>The base URL for the CPTL Model Server used by this set of views.</p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Data Params</td>
+	  <td><p><b>Required:</b><br/>
+	      <code>server_base_url</code><br/>
+	      example: <code>http://localhost:443')</code><br/>
+	    <p>The base URL for the CPTL Model Server used by this set of views.</p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Success Response</td>
+	  <td>
+	    <ul>
+	      <li><b>Code:</b> 200 <br/>
+		<b>Content:</b> 
+	        <p>An HTML page with the configuration.</p>
+	      </li>
+	    </ul>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Error Response</td>
+	  <td>
+	    <ul>
+	      <li><b>Code:</b> cptl_base_url not set<br/>
+	        <b>Content:</b> <code> CPTL Server Base URL ('server_base_url') needs to be configured!</code><br/></li>
+	    </ul>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Sample Call 1</td>
+	  <td>
+	    <code>/api/v1.0.0/views/config.html</code><br/>
+	   (<a href="http://localhost:8008/config.html">Call</a>)
+	</tr>
+      </table>      
+    </div> <!-- content-->
+  </body> 
+</html>

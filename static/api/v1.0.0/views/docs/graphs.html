@@ -1,0 +1,150 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+  <head>
+    <title>CPTL Views API</title>
+    <link rel="stylesheet" href="/static/css/jsdoc.css">
+  </head>
+  <body>
+    <!-- header -->
+    <div id="header"></div>
+
+    <!-- resource index -->
+    <div id="index">
+      <ul class="classList">
+	<li><a href="index.html">/api/v1.0.0/views</a></li>
+	<li><a href="/static/api/v1.0.0/views/docs/config.html">/api/v1.0.0/views/config</a></li>	
+	<li><a href="/static/api/v1.0.0/views/docs/graphs.html">/api/v1.0.0/views/graphs</a></li>
+      </ul>
+    </div>
+
+    <div id="content">      
+      <h1 class="classTitle">Resource  /api/v1.0.0/views/graphs</h1>
+      <br/>
+
+      <table class="summaryTable">
+	<tr>
+	  <th colspan="2">Graph Inventory</th>
+	</tr>
+	<tr>
+	  <td>URL</td>
+	  <td><b><code>/api/v1.0.0/views/graphs/inventory.html</code></b>
+	</tr>
+	<tr>
+	  <td>Method</td>
+	  <td><code>GET</code></td>
+	</tr>
+	<tr>
+	  <td>URL Params</td>
+	  <td>None</td>
+	</tr>
+	<tr>
+	  <td>Local Storage</td>
+	  <td><p><b>Required:</b><br/>
+	      <code>server_base_url</code><br/>
+	      example: <code>localStorage.setItem('server_base_url', 'http://localhost:443')</code><br/>
+	    <p>The base URL for the CPTL Model Server used by this set of views.  Both the
+	      request for the graph, and the icons in the force directed visualization
+	      require this to be set.</p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Data Params</td>
+	  <td>None</td>
+	</tr>
+	<tr>
+	  <td>Success Response</td>
+	  <td>
+	    <ul>
+	      <li><b>Code:</b> 200 <br/>
+		<b>Content:</b> 
+	        <p>An HTML page with a list of graphs known by the CPTL Model Server and links to their corresponding force directed graph view.</p>
+	      </li>
+	    </ul>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Error Response</td>
+	  <td>
+	    <ul>
+	      <li><b>Code:</b> cptl_base_url not set<br/>
+	        <b>Content:</b> <code> CPTL Server Base URL ('server_base_url') needs to be configured!</code><br/></li>
+	    </ul>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Sample Call 1</td>
+	  <td>
+	    <code>/api/v1.0.0/views/graphs/inventory.html</code><br/>
+	   (<a href="http://localhost:8008/graphs/inventory.html">Call</a>)
+	</tr>
+      </table>      
+      
+      <table class="summaryTable">
+	<tr>
+	  <th colspan="2">Force Directed Graph</th>
+	</tr>
+	<tr>
+	  <td>URL</td>
+	  <td><b><code>/api/v1.0.0/views/graphs/force_directed?graph_ref=514d63aa-1fcf-423b-880d-168bac34354f</code></b>
+	</tr>
+	<tr>
+	  <td>Method</td>
+	  <td><code>GET</code></td>
+	</tr>
+	<tr>
+	  <td>URL Params</td>
+	  <td><p><b>Required:</b><br/>
+	      <code>graph_ref=[UUID]</code><br/>
+	      example: graph_ref=514d63aa-1fcf-423b-880d-168bac34354f</p></td>
+	</tr>
+	<tr>
+	  <td>Local Storage</td>
+	  <td><p><b>Required:</b><br/>
+	      <code>server_base_url</code><br/>
+	      example: <code>localStorage.setItem('server_base_url', 'http://localhost:443')</code><br/>
+	    <p>The base URL for the CPTL Model Server used by this set of views.  Both the
+	      request for the graph, and the icons in the force directed visualization
+	      require this to be set.</p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Data Params</td>
+	  <td>None</td>
+	</tr>
+	<tr>
+	  <td>Success Response</td>
+	  <td>
+	    <ul>
+	      <li><b>Code:</b> 200 <br/>
+		<b>Content:</b> 
+	        <p>A force-directed graph visualization based on the D3JS Graph Library.</p>
+	      </li>
+	    </ul>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Error Response</td>
+	  <td>
+	    <ul>
+	      <li><b>Code:</b> cptl_base_url not set<br/>
+	        <b>Content:</b> <code> CPTL Server Base URL ('server_base_url') needs to be configured!</code><br/></li>
+	    </ul>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Sample Call 1</td>
+	  <td>
+	    <code>/api/v1.0.0/views/graphs/force_directed.html?graph_ref=514d63aa-1fcf-423b-880d-168bac34354f</code><br/>
+	    (<a href="http://localhost:8008/graphs/force_directed.html?graph_ref=514d63aa-1fcf-423b-880d-168bac34354f">Call</a>)
+	    <h4>Styling the Graph</h4>
+	    <ol>
+	      <li>Open the JavaScript Console</li>
+	      <li>To present cyber connections as blue lines:  <code>update_link_style(link_selector, 'cptlc:hasLink', 'style', 'stroke: blue; stroke-width:2;')</code></li>
+	      <li>To present cyber-physical connections as dashed green lines:  <code>update_link_style(link_selector, 'snet:hasBreakerConnections', 'style', 'stroke: green; stroke-width:2; stroke-dasharray: 5,5;')</code></li>
+	      <li>To present physical connections as orange lines:  <code>update_link_style(link_selector, 'syard:hasLine', 'style', 'stroke: orange; stroke-width:2;')</code></li>	      
+	      <li>To highlight a node in red: <code>update_node_state(node_selector, 'bddfe647-0406-435a-b2f7-7dba91a715f6', 'style', 'fill:red')</code></li>
+	    </ol>
+	</tr>
+      </table>
+    </div> <!-- content-->
+  </body> 
+</html>
