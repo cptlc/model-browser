@@ -120,7 +120,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     // Initialize the force layout
     var color = d3.scale.category10();
-    var charge = -500;
+    var charge = -1500;
     var height = 1000;
     var link_distance = 100;
     var width = 1000;
@@ -198,7 +198,12 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      * Node Icons
      */
     function get_image_url(d) {
-        var image_url = "#" + d["rdfs:type"] + "_image";
+        var types = d["rdfs:type"].split(",");
+        var type = types[0];
+        if ( types.length > 1 ) {
+           type = types[1];   			 
+        }
+        var image_url = "#" + type + "_image";
         return "url(" + image_url + ")";
     }
 

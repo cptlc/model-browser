@@ -63,6 +63,79 @@ Website directly based on the following:  http://cite-architecture.github.io
 	<!-- RSS -->
 	<link rel="alternate" type="application/rss+xml"
 	      title="RSS" href="/atom.xml">
+
+	<script src="../static/js/cptl/api/v1.0.0/graphs/socket_graphs_dao.js"></script>
+	<script src="/static/js/jquery/jquery.min.js"></script>
+	<script>
+
+	  var server_base_url = localStorage.getItem("server_base_url");
+	  if ( server_base_url == null || server_base_url == "" ) {
+	    console.log("CPTL Model Server Base URL needs to be set!");
+	  }
+	  
+	  function update_inventory(data, textStatus, jqXHR) {
+	    var model_keys = Object.keys(data).sort();
+
+	    for ( var i=0; i < model_keys.length; i++ ) {
+		var key = model_keys[i];
+                var model = data[key];
+		var tr_element = document.createElement("tr");	       
+                 	       
+		var label = null;
+	        var type = null;
+                var graph = null;
+
+                if ( "rdfs:label" in model ) {
+		  var td_element = document.createElement("td");	       
+		  var label_text = document.createTextNode( model["rdfs:label"] );
+	          td_element.appendChild(label_text);
+		  tr_element.appendChild(td_element);
+                }
+			       
+                if ( "rdfs:type" in model ) {
+		  var td_element = document.createElement("td");	       
+		  var label_text = document.createTextNode( model["rdfs:type"] );
+	          td_element.appendChild(label_text);
+		  tr_element.appendChild(td_element);
+                }
+
+                if ( "graph" in model ) {
+		  var td_element = document.createElement("td");	       			       
+                  var a1_element = document.createElement("a");
+                  var a2_element = document.createElement("a");
+	          var graph_link = "/graphs/force_directed.html?graph_ref=" + key;
+                  var json_link = server_base_url + "/api/v1.0.0/graphs/" + key;
+			       
+	          a1_element.setAttribute("href", graph_link);
+	          var a1_content = document.createTextNode( "Force" );
+                  a1_element.appendChild(a1_content);
+
+                  var separator = document.createTextNode(" | ");
+		  	       
+	          a2_element.setAttribute("href", json_link);
+	          var a2_content = document.createTextNode( "JSON" );
+	          a2_element.appendChild(a2_content);
+			       
+                  td_element.appendChild(a1_element);
+                  td_element.appendChild(separator);			       
+                  td_element.appendChild(a2_element);
+                  tr_element.appendChild(td_element);			       
+		}	       
+	        var inventory_table = $('#inventory tbody').append(tr_element);
+	     }
+
+	  }
+	  
+	  function init_inventory() {
+	    var graphs_dao = new SocketGraphsDAO();
+	    graphs_dao.config.base_url = server_base_url;
+
+	    var graph_ref = null;
+	    graphs_dao.get_graphs( graph_ref, update_inventory );
+	  }
+	  
+	  $(document).ready( init_inventory );
+	</script>
   </head>
 
   <body class="theme-base-0d">
@@ -86,20 +159,20 @@ Website directly based on the following:  http://cite-architecture.github.io
 	    <a class="sidebar-nav-item" href="/">Home</a>
 
 	    <a class="sidebar-nav-item"
-	       href="config.html">Config</a>
+	       href="../config.html">Config</a>
 
 	    <a class="sidebar-nav-item"
-	       href="static/api/v1.0.0/views/docs/index.html">Docs</a>
+	       href="/static/api/v1.0.0/views/docs/index.html">Docs</a>
 	    
 	    <a class="sidebar-nav-item"
-	       href="graphs/inventory.html">Graphs</a>
+	       href="/">Graphs</a>
 	    
 	  </nav>
 
 	  <div class="sidebar-item">
 	    <p>
 	      Site last updated:
-	      February 28, 2016
+	      March 9, 2016
 	    </p>
 	  </div>
 	</div>
@@ -127,24 +200,15 @@ Website directly based on the following:  http://cite-architecture.github.io
 	  </div> <!-- masthead -->
 
 	  <div class="container content">
-	    <!--<div class="posts">
-	      <h3>New</h3>
-	      <ul>
-		<li><span class="datelabel">February 25, 2016:  Alpha release of a
-		    <a href="https://github.com/cptlc/model-server">CPTL Model REST Service</a> now available.</li>
-		
-              </ul>
-              <a href="news.html">Older news</a>
-	    </div> -->
-	    <h2>Getting Started</h2>
-	    <h3 id="about">Config</h3>
-	    <p>First, go to the <a href="config.html">config</a> page, type in the name of your CPTL Server, and hit 'save'</p>
 
-	    <h3 id="about">Graphs</h3>
-	    <p>Next, go check out some of the graphs available through that server</p>
-	    <ul>
-	      <li><a href="graphs/inventory.html"/>Graphs Inventory</li>
-	    </ul>
+	    <h3 id="about">Graphs Inventory</h3>
+	    <table id="inventory">
+	      <tr>
+		<th>Label</th>
+		<th>Type</th>
+		<th>Expressions</th>
+	      </tr>
+	    </table>
 	    
          </div> <!-- container content -->
 	 <div class="footer">

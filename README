@@ -1,7 +1,7 @@
 PREREQUISITES:
 * A working CPTL Model Server (https://github.com/cptlc/model-server).
   - Modify the headers in model-server/src/cptl/requests.py to 'Access-Control-Allow-Origin' to
-     the URL for the browser you are about to install (e.g. http://localhost:8008).  Do this for
+     the URL for the browser oyou are about to install (e.g. http://localhost:8008).  Do this for
      all Request Handlers.
 
 CLONE REPOSITORY
